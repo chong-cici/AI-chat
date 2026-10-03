@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
-import ChatPage from './pages/ChatPage.vue'
+import App from './App.vue'
+import router from './router'
 import './style.css'
 
-createApp(ChatPage).mount('#app')
+createApp(App).use(router).mount('#app')

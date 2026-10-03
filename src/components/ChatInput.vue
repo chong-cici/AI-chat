@@ -2,11 +2,12 @@
 import { ref } from 'vue'
 
 const inputValue = ref('')
+const props = defineProps<{ isSending: boolean }>()
 const emit = defineEmits<{ sendMessage: [value: string] }>()
 
 function send() {
   const value = inputValue.value.trim()
-  if (!value) return
+  if (!value || props.isSending) return
 
   emit('sendMessage', value)
   inputValue.value = ''
@@ -21,6 +22,6 @@ function send() {
       placeholder="输入消息…"
       type="text"
     />
-    <button type="submit" :disabled="!inputValue.trim()">发送</button>
+    <button type="submit" :disabled="isSending || !inputValue.trim()">{{ isSending ? '发送中…' : '发送' }}</button>
   </form>
 </template>
